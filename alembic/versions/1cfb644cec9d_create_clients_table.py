@@ -28,7 +28,11 @@ def upgrade() -> None:
         sa.Column('Description', sa.Text),
         sa.Column('Type', sa.String),
         sa.Column('Status', sa.String),
-        sa.Column('Active_Projects', sa.Integer, server_default='0')
+        sa.Column('Active_Projects', sa.Integer, server_default='0'),
+
+        # ⏱️ Timestamps
+        sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False),
+        sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.func.now(), onupdate=sa.func.now(), nullable=False),
     )
 
 

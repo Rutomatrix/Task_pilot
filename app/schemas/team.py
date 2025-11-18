@@ -8,7 +8,7 @@ class TeamBase(BaseModel):
 
     class Config:
         orm_mode = True
-        allow_population_by_field_name = True  # allows both alias & field names
+        allow_population_by_field_name = True
         populate_by_name = True
 
 
@@ -19,8 +19,13 @@ class TeamCreate(TeamBase):
 
 # Schema for updating a team (all fields optional)
 class TeamUpdate(BaseModel):
-    Team_ID: Optional[str]
-    Category: Optional[str]
+    Team_ID: Optional[str] = Field(None, alias="Team_ID")
+    Category: Optional[str] = Field(None, alias="Category")
+
+    class Config:
+        orm_mode = True
+        allow_population_by_field_name = True
+        populate_by_name = True
 
 
 # Schema for response (includes id)
@@ -30,3 +35,4 @@ class TeamResponse(TeamBase):
     class Config:
         orm_mode = True
         allow_population_by_field_name = True
+        populate_by_name = True

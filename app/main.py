@@ -8,6 +8,10 @@ from app.routers.teams import router as teams_router
 from app.imports.import_teams import router as import_teams_router
 from app.routers.projects import router as projects_router
 from app.imports.import_projects import router as import_projects_router
+from app.routers.tasks import router as tasks_router
+from app.imports.import_tasks import router as import_tasks_router
+from app.routers.employees import router as employees_routes
+from app.imports.import_employees import router as import_employees_routes
 
 app = FastAPI(title="TaskPilot API")
 
@@ -35,6 +39,14 @@ app.include_router(teams_router, prefix="/api", tags=["Teams"])
 # Projects routes
 app.include_router(import_projects_router, prefix="/api", tags=["Projects"])
 app.include_router(projects_router, prefix="/api", tags=["Projects"])
+
+# Tasks routes
+app.include_router(import_tasks_router, prefix="/api", tags=["Tasks"])
+app.include_router(tasks_router, prefix="/api", tags=["Tasks"])
+
+# Tasks routes
+app.include_router(import_employees_routes, prefix="/api", tags=["Employees"])
+app.include_router(employees_routes, prefix="/api", tags=["Employees"])
 
 @app.get("/")
 def read_root():

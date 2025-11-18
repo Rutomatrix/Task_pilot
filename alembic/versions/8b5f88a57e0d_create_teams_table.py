@@ -24,7 +24,11 @@ def upgrade() -> None:
         'teams',
         sa.Column('id', sa.Integer, primary_key=True, index=True),
         sa.Column('Team_ID', sa.String, unique=True, nullable=False),
-        sa.Column('Category', sa.String, nullable=False)
+        sa.Column('Category', sa.String, nullable=False),
+
+        # ⏱️ Timestamps
+        sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False),
+        sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.func.now(), onupdate=sa.func.now(), nullable=False),
     )
 
 

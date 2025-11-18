@@ -2,6 +2,8 @@ from pydantic import BaseModel, Field
 from typing import Optional, List
 from datetime import datetime
 
+
+# ---------- Base ----------
 class ProjectBase(BaseModel):
     project_id: str = Field(..., alias="Project_ID")
     name: str = Field(..., alias="Name")
@@ -18,10 +20,12 @@ class ProjectBase(BaseModel):
         populate_by_name = True
 
 
+# ---------- Create ----------
 class ProjectCreate(ProjectBase):
     pass
 
 
+# ---------- Update ----------
 class ProjectUpdate(BaseModel):
     Project_ID: Optional[str]
     Name: Optional[str]
@@ -32,10 +36,19 @@ class ProjectUpdate(BaseModel):
     Status: Optional[str]
     Linked_Inventory: Optional[List[str]]
 
+    class Config:
+        orm_mode = True
+        allow_population_by_field_name = True
+        populate_by_name = True
 
+
+# ---------- Response ----------
 class ProjectResponse(ProjectBase):
     id: int
+    created_at: datetime
+    updated_at: datetime
 
     class Config:
         orm_mode = True
         allow_population_by_field_name = True
+        populate_by_name = True
